@@ -1,5 +1,6 @@
 package com.pdm.saludapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +13,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val btnHello = findViewById<AppCompatButton>(R.id.btnHello)
-        val etName = findViewById<AppCompatEditText>(R.id.etName)
+        val btnHello:AppCompatButton = findViewById(R.id.btnHello)
+        val etName:AppCompatEditText = findViewById(R.id.etName)
 
         // PRUEBA 1
 //        btnHello.setOnClickListener {
@@ -39,16 +40,25 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         // Snackbar (https://m2.material.io/components/snackbars#anatomy)
+//        btnHello.setOnClickListener {
+//            val name = etName.text.toString()
+//
+//            if (name.isNotEmpty()) {
+//                Snackbar.make(btnHello, "Hola $name!", Snackbar.LENGTH_SHORT)
+//                    .setAnchorView(btnHello)
+//                    .setAction("CLOSE") {
+//                        finishAffinity()
+//                    }
+//                    .show()
+//            }
+//        }
+
         btnHello.setOnClickListener {
             val name = etName.text.toString()
-
             if (name.isNotEmpty()) {
-                Snackbar.make(btnHello, "Hola $name!", Snackbar.LENGTH_SHORT)
-                    .setAnchorView(btnHello)
-                    .setAction("CLOSE") {
-                        finishAffinity()
-                    }
-                    .show()
+                val intent = Intent(this, GreetingActivity::class.java)
+                intent.putExtra("EXTRA_NAME", name)
+                startActivity(intent)
             }
         }
 
